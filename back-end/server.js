@@ -10,9 +10,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../build')));
 app.use('/static', express.static(path.join(__dirname, 'build//static')));
 
-//Mongoose Stuff
 main().catch(err => console.log(err));
 
+//Connect to the MongoDB
 async function main() {
     await mongoose.connect('mongodb+srv://admin:admin@cluster0.fk5vge6.mongodb.net/?retryWrites=true&w=majority');
 }
@@ -26,7 +26,7 @@ const teamSchema = new mongoose.Schema({
 
 const teamModel = mongoose.model('Team', teamSchema);
 
-//CORS code
+//CORS Stuff
 const cors = require('cors');
 const { ObjectId } = require('mongodb')
 app.use(cors());
@@ -39,9 +39,9 @@ app.use(function (req, res, next) {
 
 });
 
-
+//The API can be searched for a team by name or ID.
 app.get('/api/teams/searchName/:teamName', async (req, res) => {
-    let teams = await teamModel.find({title: req.params.teamName});
+    let teams = await teamModel.find({teamName: req.params.teamName});
     res.json(teams);
 })
 app.get('/api/teams/searchID/:teamID', async (req, res) => {
@@ -49,18 +49,20 @@ app.get('/api/teams/searchID/:teamID', async (req, res) => {
     res.json(teams);
 })
 
+//Teams can be deleted via ID. The res.send is not seen by the user, as on the app they are redirected to ViewTeams.
 app.delete('/api/teams/deleteID/:teamID', async (req, res) => {
     await teamModel.findByIdAndDelete(req.params.teamID);
     console.log("deleted: "+req.params.teamID)
     res.send("Team Deleted");
 })
 
+//Fetch all teams. Used by ViewTeams.
 app.get('/api/teams', async (req, res) => {
     let teams = await teamModel.find({});
     res.json(teams);
 })
 
-//Send a team to the database
+//Post a team to the database.
 app.post('/api/teams', (req, res) => {
 
     console.log(req.body);
@@ -74,7 +76,7 @@ app.post('/api/teams', (req, res) => {
     .catch(()=>{res.send("Team Not Created")});
 })
 
-//Update a team in the database
+//Update a Team's data
 app.put('/api/teams/:id', async (req, res) => {
     console.log(req.body)
 
@@ -83,7 +85,7 @@ app.put('/api/teams/:id', async (req, res) => {
     .catch(() => {res.send("Team not Updated")});
 })
 
-//Send Back React App
+//If the user has the app built and goes to localhost:3000/*, they'll end up on the home page of the app.
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname+"/../build/index.html"));
 })

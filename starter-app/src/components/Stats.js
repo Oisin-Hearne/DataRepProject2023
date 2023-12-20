@@ -1,6 +1,3 @@
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import axios from 'axios';
 import Image from 'react-bootstrap/Image';
 
 //Displays the name, number and image of each pokemon passed to it.

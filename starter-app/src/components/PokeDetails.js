@@ -4,7 +4,7 @@ import Stats from './Stats';
 function PokeDetails(props) {
 
   //Sets up the table for listing all pokémon.
-
+  //The column stuff was some experimenting, trying to get the proportions of the table right.
     return props.mons.map(
       (mon, i) => {
         return (

@@ -1,9 +1,8 @@
-import TeamItem from "./TeamItem";
+import TeamRow from "./TeamRow";
 import Table from 'react-bootstrap/Table';
 
-//Reads the TeamData array and converts it to a map.
-//For every team, also calls the TeamItem component
-//to display it.
+//Sets up the table for displaying Teams and for each team in the data passed into props,
+//Teams will call TeamItem to create a row for it.
 function Teams(props) {
     return props.teams.map(
         (team)=>{
@@ -18,7 +17,7 @@ function Teams(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        <TeamItem t={team} reload={()=>{props.Reload()}}></TeamItem>
+                        <TeamRow t={team} reload={()=>{props.Reload()}}></TeamRow>
                     </tbody>
                 </Table>);
         }

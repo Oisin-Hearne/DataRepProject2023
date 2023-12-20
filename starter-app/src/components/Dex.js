@@ -1,6 +1,4 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
-import Image from 'react-bootstrap/Image';
 import PokeDetails from './PokeDetails';
 import { useEffect, useState } from 'react';
 import axios from 'axios';

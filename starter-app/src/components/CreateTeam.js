@@ -15,7 +15,8 @@ function Create() {
   const [monsData, setData] = useState([]);
 
   //Alongside accessing the teams API stored in mongodb, I'm also using an online API
-  //"PokeAPI" just to get the names and details of Pokémon so displaying them is easier.
+  //"PokeAPI" just to get the names and details of Pokémon so displaying them is easier (There's over 900!)
+  //This is used specifically for the dropdown menu in the selection boxes
   useEffect(
     () => {
       axios.get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=905").then(
@@ -37,7 +38,7 @@ function Create() {
   const [creator, setCreator] = useState('');
   const imgURL = "https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/"
 
-  //Same Method as used in Edit used here.
+  //Same Method as used in Edit is used here.
   function changeMons(index, newMon) {
     const updatedMons = mons.map((mon, i) => {
       if (i === index)
@@ -64,6 +65,7 @@ function Create() {
     postTeam(team);
   };
 
+  //Data is sent to /api/teams, then user is redirected back to the view page.
   function postTeam(team) {
     axios.post("http://localhost:4000/api/teams", team).then(
       (response) => {
@@ -77,7 +79,9 @@ function Create() {
     );
   }
 
-  //onChange below lets the valeus of title, author and cover be updated every time the user changes the field.
+//Using a bootstrap Form as it looks nicer and has a grid-like format.
+//onChange updates the values of the team to be posted every time the user makes a change.
+//The Pokémon selectors are handled using Form.Select and a map of the data pulled from PokeAPI.
   return (
     <div className="form-group" style={{ margin: "auto", width: "50%", textAlign: "center", padding: "10px" }}><h2><i>Create a team!</i></h2>
       <Form onSubmit={handleSubmit}>

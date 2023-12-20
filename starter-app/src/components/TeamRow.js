@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image';
 
 //Displays the data of a team in a table.
 //Fetches the images for the pokémon from the Pokesprite repository - https://msikma.github.io/pokesprite/overview/dex-gen8.html
-function TeamItem(props) {
+function TeamRow(props) {
 
     return (
         <tr>
@@ -20,7 +20,7 @@ function TeamItem(props) {
                     //Sends a delete request to the server with the ID of the current team.
                     axios.delete('http://localhost:4000/api/teams/deleteID/' + props.t._id)
                         .then((response) => {
-                            //Refresh Read
+                            //Refresh the page so that the deleted team vanishes
                             let r = props.reload();
                         }).catch(function (error) {
                             console.log(error);
@@ -31,4 +31,4 @@ function TeamItem(props) {
     );
 }
 
-export default TeamItem;
+export default TeamRow;

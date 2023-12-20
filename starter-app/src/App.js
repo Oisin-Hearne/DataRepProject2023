@@ -40,7 +40,9 @@ function App() {
         <Route path="update/:id" element={<Update />}></Route>
 
       </Routes>
+      <Home></Home>
     </BrowserRouter>
+    
   );
 }
 

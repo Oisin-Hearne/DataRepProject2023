@@ -84,6 +84,7 @@ export default function Update(props) {
             });
     }
 
+    //Layout is mostly similar to CreateTeam, just autofilled with the values retrieved from the team to be edited.
     return (
         <div className="form-group" style={{ margin: "auto", width: "50%", textAlign: "center", padding: "10px" }}><i><h2>Editing Team...</h2></i>
             <Form onSubmit={handleSubmit}>
