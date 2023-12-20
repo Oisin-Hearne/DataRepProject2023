@@ -14,7 +14,7 @@ function TeamItem(props) {
             <td>{props.t.teamName}</td>
             <td>{props.t.creator}</td>
             <td>{
-                props.t.pokemon.map((mon) => (<Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/{mon}.png" />))
+                props.t.pokemon.map((mon) => (<Image src={"https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/"+mon+".png"} />))
             }</td>
             <td>
                 <Link to={"/edit/" + props.t._id} className="btn btn-primary">Edit</Link>

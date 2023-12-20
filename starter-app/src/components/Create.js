@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 
 function Create() {
 
@@ -31,6 +32,7 @@ function Create() {
   const [name, setName] = useState('');
   const [mons, setMons] = useState(['','','','','','']);
   const [creator, setCreator] = useState('');
+  const imgURL = "https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/"
 
   //Same Method as used in Edit used here.
   function changeMons(index, newMon) {
@@ -42,7 +44,8 @@ function Create() {
     })
 
     setMons(updatedMons)
-    console.log(updatedMons)
+    //Also updates the source of the image attached to the form option, displaying the pokemon chosen.
+    document.getElementById('img'+index).src = imgURL+newMon+".png";
   }
 
   const handleSubmit = (e) => {
@@ -101,6 +104,7 @@ function Create() {
               <option>Select a Pokémon!</option>
               {monsData.map((poke) => (<option>{poke.name}</option>))}
             </Form.Select>
+            <Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/unknown-gen5.png" id="img0" width="68" height="56"/>
           </Form.Group>
 
           <Form.Group as={Col}>
@@ -109,6 +113,7 @@ function Create() {
               <option>Select a Pokémon!</option>
               {monsData.map((poke) => (<option>{poke.name}</option>))}
             </Form.Select>
+            <Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/unknown-gen5.png" id="img1" width="68" height="56"/>
           </Form.Group>
 
           <Form.Group as={Col}>
@@ -117,6 +122,7 @@ function Create() {
               <option>Select a Pokémon!</option>
               {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
+            <Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/unknown-gen5.png" id="img2" width="68" height="56"/>
           </Form.Group>
 
         </Row>
@@ -128,6 +134,7 @@ function Create() {
               <option>Select a Pokémon!</option>
               {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
+            <Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/unknown-gen5.png" id="img3" width="68" height="56"/>
           </Form.Group>
 
           <Form.Group as={Col}>
@@ -136,17 +143,24 @@ function Create() {
               <option>Select a Pokémon!</option>
               {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
+            <Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/unknown-gen5.png" id="img4" width="68" height="56"/>
           </Form.Group>
 
           <Form.Group as={Col}>
             <Form.Label>6</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(5, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.map((poke) => (<option value={poke.name}><Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/{poke.name}.png" thumbnail/>{poke.name}</option>))}
+              
+              {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
+            <Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/unknown-gen5.png" id="img5" width="68" height="56"/>
           </Form.Group>
         </Row>
-
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Button type="Submit">Upload Team</Button>
+          </Form.Group>
+        </Row>
       </Form>
     </div>
   );

@@ -37,10 +37,9 @@ function Read() {
   }
   
 
-    //Read calls Books, Books calls BookItem.
   return (
     <div>
-      <h2>Read Component</h2>
+      <h2>Current Teams</h2>
       <Teams teams={teamData} Reload={ReloadData}></Teams>
     </div>
   );
