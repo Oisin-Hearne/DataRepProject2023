@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
+import Dex from './components/Dex';
 import Read from './components/Read';
 import Home from './components/Home';
 import Edit from './components/Edit';
@@ -30,6 +30,7 @@ function App() {
             <Nav.Link href="home">Home</Nav.Link>
             <Nav.Link href="Read">Teams</Nav.Link>
             <Nav.Link href="Create">Build</Nav.Link>
+            <Nav.Link href="Dex">Dex</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -37,7 +38,9 @@ function App() {
         <Route path="Create" element={<Create />}></Route>
         <Route path="Read" element={<Read />}></Route>
         <Route path="home" element={<Home />}></Route>
+        <Route path="dex" element={<Dex />}></Route>
         <Route path="edit/:id" element={<Edit />}></Route>
+
       </Routes>
     </BrowserRouter>
   );

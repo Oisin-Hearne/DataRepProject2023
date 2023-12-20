@@ -6,8 +6,11 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
+
 
 function Create() {
+  const nav = useNavigate();
 
   const [monsData, setData] = useState([]);
 
@@ -65,6 +68,7 @@ function Create() {
     axios.post("http://localhost:4000/api/teams", team).then(
       (response) => {
         console.log(response);
+        nav('/read');
       }
     ).catch(
       (error) => {

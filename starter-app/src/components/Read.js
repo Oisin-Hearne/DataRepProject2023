@@ -38,8 +38,8 @@ function Read() {
   
 
   return (
-    <div>
-      <h2>Current Teams</h2>
+    <div className="form-group" style={{ margin: "auto", width: "80%", textAlign: "center", padding: "10px" }}>
+    <h2>Current Teams</h2>
       <Teams teams={teamData} Reload={ReloadData}></Teams>
     </div>
   );
