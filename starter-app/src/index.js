@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Read from './components/Read';
-import ContentC from './components/ContentC';
+import Home from './components/Home';
 import Create from './components/Create';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';

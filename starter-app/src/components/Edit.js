@@ -66,12 +66,12 @@ export default function Edit(props) {
                 <div className="form-group">
                     <label>Change Team Name: </label><br/>
                     <input type="text" classname="form-control" value={name}
-                    onChange={(e) => setTitle(e.target.value)}/>
+                    onChange={(e) => setName(e.target.value)}/>
                 </div><br/>
                 <div className="form-group">
                     <label>Change Creator: </label><br/>
                     <input type="text" classname="form-control" value={creator}
-                    onChange={(e) => setURL(e.target.value)}/>
+                    onChange={(e) => setCreator(e.target.value)}/>
                 </div><br/>
                 <div className="form-group">
                     <label>Change Pokémon: </label><br/>
@@ -80,7 +80,7 @@ export default function Edit(props) {
                             mons.map((mon, i) => 
                             <li key={i}><input type="text" classname="form-control" value={mon}
                                 onChange={
-                                    changeMons(i, e.target.value)
+                                    (e) => changeMons(i, e.target.value)
                             }/></li>)
                         }
                     </ul>

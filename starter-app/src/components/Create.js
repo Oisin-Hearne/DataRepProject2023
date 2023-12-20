@@ -1,10 +1,12 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Image from 'react-bootstrap/Image';
 
 function Create() {
-
 
   const [monsData, setData] = useState([]);
 
@@ -12,12 +14,14 @@ function Create() {
   //"PokeAPI" just to get the names and details of Pokémon so displaying them is easier.
   useEffect(
     () => {
-      axios.get("https://pokeapi.co/api/v2/pokemon").then(
+      axios.get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=905").then(
         (response) => {
-          setData(response.data);
+          console.log(response.data.results);
+          setData(response.data.results);
         }
       ).catch(
         (error) => {
+          console.log(":(")
           console.log(error);
         }
       );
@@ -25,7 +29,7 @@ function Create() {
   );
 
   const [name, setName] = useState('');
-  const [mons, setMons] = useState(['']);
+  const [mons, setMons] = useState(['','','','','','']);
   const [creator, setCreator] = useState('');
 
   //Same Method as used in Edit used here.
@@ -36,7 +40,9 @@ function Create() {
       else
         return mon;
     })
+
     setMons(updatedMons)
+    console.log(updatedMons)
   }
 
   const handleSubmit = (e) => {
@@ -81,7 +87,7 @@ function Create() {
             <Form.Text muted>Input the name of the person creating the team!</Form.Text>
           </Form.Group>
         </Row>
-
+        <br/><br/>
         <Row classname="mb-3">
           <Form.Group as={Col}>
             <Form.Label>Select some Pokémon!</Form.Label>
@@ -93,7 +99,7 @@ function Create() {
             <Form.Label>1</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(0, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.results.map((poke) => (<option>{poke.name}</option>))}
+              {monsData.map((poke) => (<option>{poke.name}</option>))}
             </Form.Select>
           </Form.Group>
 
@@ -101,7 +107,7 @@ function Create() {
             <Form.Label>2</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(1, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.results.map((poke) => (<option>{poke.name}</option>))}
+              {monsData.map((poke) => (<option>{poke.name}</option>))}
             </Form.Select>
           </Form.Group>
 
@@ -109,7 +115,7 @@ function Create() {
             <Form.Label>3</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(2, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.results.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
+              {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
           </Form.Group>
 
@@ -120,7 +126,7 @@ function Create() {
             <Form.Label>4</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(3, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.results.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
+              {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
           </Form.Group>
 
@@ -128,7 +134,7 @@ function Create() {
             <Form.Label>5</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(4, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.results.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
+              {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
           </Form.Group>
 
@@ -136,14 +142,10 @@ function Create() {
             <Form.Label>6</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(5, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.results.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
+              {monsData.map((poke) => (<option value={poke.name}><Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/{poke.name}.png" thumbnail/>{poke.name}</option>))}
             </Form.Select>
           </Form.Group>
         </Row>
-        
-
-        <input type="text" className="form-control" value={cover} onChange={(e) => { setCover(e.target.value) }} /><br />
-        <br /><input type="submit" className="form-control" value="Add Book" />
 
       </Form>
     </div>

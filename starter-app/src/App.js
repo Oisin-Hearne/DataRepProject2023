@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Read from './components/Read';
-import ContentC from './components/ContentC';
+import Home from './components/Home';
 import Edit from './components/Edit';
 import Create from './components/Create';
 import Nav from 'react-bootstrap/Nav';
