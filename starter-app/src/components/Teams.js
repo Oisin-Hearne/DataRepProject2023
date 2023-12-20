@@ -14,7 +14,7 @@ function Teams(props) {
                             <th>Team Name</th>
                             <th>Team Creator</th>
                             <th>Pokémon</th>
-                            <th>Edit / Delete ?</th>
+                            <th>Modify Team</th>
                         </tr>
                     </thead>
                     <tbody>

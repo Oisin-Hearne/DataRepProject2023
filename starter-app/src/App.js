@@ -1,13 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
 import Dex from './components/Dex';
-import Read from './components/Read';
+import ViewTeams from './components/ViewTeams';
 import Home from './components/Home';
-import Edit from './components/Edit';
-import Create from './components/Create';
+import Update from './components/Update';
+import CreateTeam from './components/CreateTeam';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -28,18 +26,18 @@ function App() {
           <Navbar.Brand href="home">Teambuilder</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="home">Home</Nav.Link>
-            <Nav.Link href="Read">Teams</Nav.Link>
-            <Nav.Link href="Create">Build</Nav.Link>
+            <Nav.Link href="ViewTeams">Teams</Nav.Link>
+            <Nav.Link href="CreateTeam">Build</Nav.Link>
             <Nav.Link href="Dex">Dex</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       <Routes>
-        <Route path="Create" element={<Create />}></Route>
-        <Route path="Read" element={<Read />}></Route>
+        <Route path="CreateTeam" element={<CreateTeam />}></Route>
+        <Route path="ViewTeams" element={<ViewTeams />}></Route>
         <Route path="home" element={<Home />}></Route>
         <Route path="dex" element={<Dex />}></Route>
-        <Route path="edit/:id" element={<Edit />}></Route>
+        <Route path="update/:id" element={<Update />}></Route>
 
       </Routes>
     </BrowserRouter>

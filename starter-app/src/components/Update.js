@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 
-export default function Edit(props) {
+export default function Update(props) {
     let { id } = useParams();
 
     const [name, setName] = useState("");
@@ -80,7 +80,7 @@ export default function Edit(props) {
         axios.put('http://localhost:4000/api/teams/' + id, newTeam)
             .then((res) => {
                 console.log(res.data);
-                nav('/read');
+                nav('/ViewTeams');
             });
     }
 

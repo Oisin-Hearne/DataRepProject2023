@@ -1,5 +1,3 @@
-//import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
@@ -17,7 +15,7 @@ function TeamItem(props) {
                 props.t.pokemon.map((mon) => (<Image src={"https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/"+mon+".png"} />))
             }</td>
             <td>
-                <Link to={"/edit/" + props.t._id} className="btn btn-primary">Edit</Link>
+                <Link to={"/update/" + props.t._id} className="btn btn-primary">Update</Link>
                 <Button variant="danger" onClick={(e) => {
                     //Sends a delete request to the server with the ID of the current team.
                     axios.delete('http://localhost:4000/api/teams/deleteID/' + props.t._id)

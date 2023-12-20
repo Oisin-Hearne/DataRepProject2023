@@ -68,7 +68,7 @@ function Create() {
     axios.post("http://localhost:4000/api/teams", team).then(
       (response) => {
         console.log(response);
-        nav('/read');
+        nav('/ViewTeams');
       }
     ).catch(
       (error) => {
@@ -106,7 +106,7 @@ function Create() {
             <Form.Label>1</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(0, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.map((poke) => (<option>{poke.name}</option>))}
+              {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
             <Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/unknown-gen5.png" id="img0" width="68" height="56"/>
           </Form.Group>
@@ -115,7 +115,7 @@ function Create() {
             <Form.Label>2</Form.Label>
             <Form.Select className="form-control" onChange={(e) => {changeMons(1, e.target.value)}}>
               <option>Select a Pokémon!</option>
-              {monsData.map((poke) => (<option>{poke.name}</option>))}
+              {monsData.map((poke) => (<option value={poke.name}>{poke.name}</option>))}
             </Form.Select>
             <Image src="https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/unknown-gen5.png" id="img1" width="68" height="56"/>
           </Form.Group>

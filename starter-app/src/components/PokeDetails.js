@@ -1,43 +1,29 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Image from 'react-bootstrap/Image';
-
+import Table from 'react-bootstrap/Table';
+import Stats from './Stats';
 
 function PokeDetails(props) {
 
-    const [monDetails, setDetails] = useState([]);
+  //Sets up the table for listing all pokémon.
 
-    //Retrieves data from our server and sets the value of TeamData to the books array returned
-    useEffect(
-      () => {
-        axios.get("https://pokeapi.co/api/v2/pokemon/"+props.name).then(
-          (response)=>{
-            setDetails(response.data);
-            console.log(response.data);
-          }
-        ).catch(
-          (error)=>{
-            console.log(error);
-          }
-        );
-      },[]
-    );
+    return props.mons.map(
+      (mon, i) => {
+        return (
+          <Table striped hover>
+            <thead>
+              <tr>
+                <th class="col-1 col-lg-1 col-md-8">Dex #</th>
+                <th class="col-12 col-lg-6 col-md-8">Name</th>
+                <th class="col-12 col-lg-6 col-md-8">Sprite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <Stats name={mon.name} index={i}></Stats>
+            </tbody>
+          </Table>
+        )
+      }
 
-    return (
-        <tr>
-            <td>{props.index+1}</td>
-            <td><Image src={"https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/"+props.name+".png"}/></td>
-            <td>{props.name}</td>
-        <td><ul class="list-group list-group-horizontal">{monDetails.types.map((t) => {
-            <li class="list-group-item">{t.type.name}</li>
-            })}</ul></td>
-        <td><ul class="list-group list-group-horizontal">{monDetails.abilities.map((ab) => {
-            <li class="list-group-item">{ab}</li>
-            })}</ul></td>
-        <td><ul class="list-group list-group-horizontal">{monDetails.stats.map((s) => {
-            <li class="list-group-item"><b>{s.stat.name}</b>: {s.base_stat}</li>
-            })}</ul></td>
-        </tr>
+
     );
 }
 

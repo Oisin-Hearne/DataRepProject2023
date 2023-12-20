@@ -3,20 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Read from './components/Read';
-import Home from './components/Home';
-import Create from './components/Create';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {
-  NavLink,
-  BrowserRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
-import { Link } from 'react-router-dom';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
