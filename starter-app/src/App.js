@@ -36,7 +36,7 @@ function App() {
       <Routes>
         <Route path="Create" element={<Create />}></Route>
         <Route path="Read" element={<Read />}></Route>
-        <Route path="home" element={<ContentC />}></Route>
+        <Route path="home" element={<Home />}></Route>
         <Route path="edit/:id" element={<Edit />}></Route>
       </Routes>
     </BrowserRouter>
