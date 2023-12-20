@@ -7,21 +7,34 @@ import { useNavigate } from "react-router-dom";
 export default function Edit(props) {
     let { id } = useParams();
 
-    const [title, setTitle] = useState("");
-    const [url, setURL] = useState("");
-    const [authors, setAuthors] = useState([""]);
+    const [name, setName] = useState("");
+    const [creator, setCreator] = useState("");
+    const [mons, setMons] = useState([""]);
+
+    function changeMons(index, newMon) {
+        //I learned this trick from the react docs here: https://react.dev/learn/updating-arrays-in-state
+        //This function is called from the multiple input boxes created by iterating through the mons array.
+        //It updates the mon at that index (leaving the others alone) in updatedMons, then sets mons to updatedMons.
+        const updatedMons= mons.map((mon, i) => {
+            if(i === index) 
+                return newMon;
+            else
+                return mon;
+        })
+        setMons(updatedMons)
+    }
 
     const nav = useNavigate();
 
-    //Get the current values of the current book
+    //Current values of the given team.
     useEffect(() => {
-        axios.get('http://localhost:4000/api/books/searchID/'+id)
+        axios.get('http://localhost:4000/api/teams/searchID/'+id)
         .then((response) => {
-            response.data.forEach(book => {
-                console.log(book);
-                setTitle(book.title);
-                setURL(book.thumbnailUrl);
-                setAuthors(book.authors);
+            response.data.forEach(team => {
+                console.log(team);
+                setName(team.teamName);
+                setCreator(team.creator);
+                setMons(team.mons);
             });
 
         }).catch(function (error) {
@@ -29,17 +42,18 @@ export default function Edit(props) {
         })
     }, []);
 
+    //Submit the updated team.
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newBook = {
+        const newTeam = {
             id: id,
-            title: title,
-            thumbnailUrl: url,
-            authors: authors
+            teamName: name,
+            creator: creator,
+            pokemon: mons
         };
 
-        //Uploads the book to the server in place of the ID being updated.
-        axios.put('http://localhost:4000/api/books/'+id, newBook)
+        //Uploads the team to the server in place of the team that's currently there.
+        axios.put('http://localhost:4000/api/teams/'+id, newTeam)
         .then((res) => {
             console.log(res.data);
             nav('/read');
@@ -50,24 +64,33 @@ export default function Edit(props) {
         <div>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Change Book Title: </label><br/>
-                    <input type="text" classname="form-control" value={title}
+                    <label>Change Team Name: </label><br/>
+                    <input type="text" classname="form-control" value={name}
                     onChange={(e) => setTitle(e.target.value)}/>
                 </div><br/>
                 <div className="form-group">
-                    <label>Change Book Cover URL: </label><br/>
-                    <input type="text" classname="form-control" value={url}
+                    <label>Change Creator: </label><br/>
+                    <input type="text" classname="form-control" value={creator}
                     onChange={(e) => setURL(e.target.value)}/>
                 </div><br/>
                 <div className="form-group">
-                    <label>Change Author: </label><br/>
-                    <input type="text" classname="form-control" value={authors}
-                    onChange={(e) => setAuthors(e.target.value)}/>
+                    <label>Change Pokémon: </label><br/>
+                    <ul>
+                        {
+                            mons.map((mon, i) => 
+                            <li key={i}><input type="text" classname="form-control" value={mon}
+                                onChange={
+                                    changeMons(i)
+                            }/></li>)
+                        }
+                    </ul>
                 </div><br/>
                 <div className="form-group">
-                    <input type="submit" value="Edit Book" className="btn btn-primary"/>
+                    <input type="submit" value="Update Team" className="btn btn-primary"/>
                 </div>
             </form>
         </div>
     );
+
+
 }

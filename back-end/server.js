@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const app = express()
 const port = 4000
 const path = require('path')
-var data = { "books": [{ "title": "Learn Git in a Month of Lunches", "isbn": "1617292419", "pageCount": 0, "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/umali.jpg", "status": "MEAP", "authors": ["Rick Umali"], "categories": [] }, { "title": "MongoDB in Action, Second Edition", "isbn": "1617291609", "pageCount": 0, "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/banker2.jpg", "status": "MEAP", "authors": ["Kyle Banker", "Peter Bakkum", "Tim Hawkins", "Shaun Verch", "Douglas Garrett"], "categories": [] }, { "title": "Getting MEAN with Mongo, Express, Angular, and Node", "isbn": "1617292036", "pageCount": 0, "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sholmes.jpg", "status": "MEAP", "authors": ["Simon Holmes"], "categories": [] }] }
 var ObjectID = require('mongodb').ObjectID;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -18,18 +17,14 @@ async function main() {
     await mongoose.connect('mongodb+srv://admin:admin@cluster0.fk5vge6.mongodb.net/?retryWrites=true&w=majority');
 }
 
-//Book Schema - Effectively outlines what fields are going to be in the database.
-const bookSchema = new mongoose.Schema({
-    title: String,
-    isbn: String,
-    pageCount: Number,
-    thumbnailUrl: String,
-    status: String,
-    authors: [String],
-    categories: [String]
+//Team Schema - Teams consist of a team name, the creator of the team, and a string array of Pokémon in the team.
+const teamSchema = new mongoose.Schema({
+    teamName: String,
+    creator: String,
+    pokemon: [String]
 });
 
-const bookModel = mongoose.model('Book', bookSchema);
+const teamModel = mongoose.model('Team', teamSchema);
 
 //CORS code
 const cors = require('cors');
@@ -44,53 +39,47 @@ app.use(function (req, res, next) {
 
 });
 
-//Fetch a book from the database by ID or Title
-app.get('/api/books/searchTitle/:booktitle', async (req, res) => {
-    let books = await bookModel.find({title: req.params.booktitle});
-    res.json(books);
+
+app.get('/api/teams/searchName/:teamName', async (req, res) => {
+    let teams = await teamModel.find({title: req.params.teamName});
+    res.json(teams);
 })
-app.get('/api/books/searchID/:bookID', async (req, res) => {
-    let books = await bookModel.find({_id: req.params.bookID});
-    res.json(books);
+app.get('/api/teams/searchID/:teamID', async (req, res) => {
+    let teams = await teamModel.find({_id: req.params.teamID});
+    res.json(teams);
 })
 
-//Delete a book via ID
-app.delete('/api/books/deleteID/:bookID', async (req, res) => {
-    await bookModel.findByIdAndDelete(req.params.bookID);
-    console.log("deleted: "+req.params.bookID)
-    res.send("Result");
+app.delete('/api/teams/deleteID/:teamID', async (req, res) => {
+    await teamModel.findByIdAndDelete(req.params.teamID);
+    console.log("deleted: "+req.params.teamID)
+    res.send("Team Deleted");
 })
 
-//Fetches all of the books from our database.
-app.get('/api/books', async (req, res) => {
-    let books = await bookModel.find({});
-    res.json(books);
+app.get('/api/teams', async (req, res) => {
+    let teams = await teamModel.find({});
+    res.json(teams);
 })
 
-//Send a book to the database
-app.post('/api/books', (req, res) => {
+//Send a team to the database
+app.post('/api/teams', (req, res) => {
 
     console.log(req.body);
 
-    bookModel.create({
-        title:req.body.title,
-        thumbnailUrl:req.body.thumbnailURL,
-        authors:req.body.authors,
-        isbn:"0000",
-        pagecount:"0",
-        status:"MEAP",
-        categories:[]
+    teamModel.create({
+        teamName:req.body.teamName,
+        creator:req.body.creator,
+        pokemon:req.body.pokemon,
 
-    }).then(()=>{res.send("Book Created")})
-    .catch(()=>{res.send("Book Not Created")});
+    }).then(()=>{res.send("Team Created")})
+    .catch(()=>{res.send("Team Not Created")});
 })
 
-//Update a book in the database
-app.put('/api/books/:id', async (req, res) => {
+//Update a team in the database
+app.put('/api/teams/:id', async (req, res) => {
 
-    let book = await bookModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
-    .then(() => {res.send("Book Updated")})
-    .catch(() => {res.send("Book not Updated")});
+    let teamModel = await teamModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    .then(() => {res.send("Team Updated")})
+    .catch(() => {res.send("Team not Updated")});
 })
 
 //Send Back React App

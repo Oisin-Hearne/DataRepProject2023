@@ -1,16 +1,16 @@
 import React from 'react';
-import Books from './Books';
+import Books from './Teams';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Read() {
 
-  const [bookData, setData] = useState([]);
+  const [teamData, setData] = useState([]);
 
-  //Retrieves data from our server and sets the value of bookData to the books array returned
+  //Retrieves data from our server and sets the value of TeamData to the books array returned
   useEffect(
     () => {
-      axios.get("http://localhost:4000/api/books").then(
+      axios.get("http://localhost:4000/api/teams").then(
         (response)=>{
           setData(response.data);
         }
@@ -22,10 +22,10 @@ function Read() {
     },[]
   );
 
-  //Reloads the data. A method to be called by BookItem whenever
+  //Reloads the data. A method to be called by TeamItem whenever
   //the delete button is pressed.
   const ReloadData = (e) => {
-    axios.get("http://localhost:4000/api/books").then(
+    axios.get("http://localhost:4000/api/teams").then(
       (response)=>{
         setData(response.data);
       }
@@ -41,7 +41,7 @@ function Read() {
   return (
     <div>
       <h2>Read Component</h2>
-      <Books myBooks={bookData} Reload={ReloadData}></Books>
+      <Books teams={teamData} Reload={ReloadData}></Books>
     </div>
   );
 
