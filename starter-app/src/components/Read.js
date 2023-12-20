@@ -1,5 +1,5 @@
 import React from 'react';
-import Books from './Teams';
+import Teams from './Teams';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -41,7 +41,7 @@ function Read() {
   return (
     <div>
       <h2>Read Component</h2>
-      <Books teams={teamData} Reload={ReloadData}></Books>
+      <Teams teams={teamData} Reload={ReloadData}></Teams>
     </div>
   );
 

@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 //to display it.
 function Teams(props) {
     return props.teams.map(
-        (book)=>{
+        (team)=>{
             return (
                 <Table striped bordered hover>
                     <thead>

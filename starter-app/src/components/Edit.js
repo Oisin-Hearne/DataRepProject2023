@@ -80,7 +80,7 @@ export default function Edit(props) {
                             mons.map((mon, i) => 
                             <li key={i}><input type="text" classname="form-control" value={mon}
                                 onChange={
-                                    changeMons(i)
+                                    changeMons(i, e.target.value)
                             }/></li>)
                         }
                     </ul>
