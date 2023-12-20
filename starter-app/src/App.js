@@ -25,11 +25,11 @@ function App() {
     <BrowserRouter>
       <Navbar bg="primary" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="home">Navbar</Navbar.Brand>
+          <Navbar.Brand href="home">Teambuilder</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="home">Home</Nav.Link>
-            <Nav.Link href="Read">Read</Nav.Link>
-            <Nav.Link href="Create">Create</Nav.Link>
+            <Nav.Link href="Read">Teams</Nav.Link>
+            <Nav.Link href="Create">Build</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

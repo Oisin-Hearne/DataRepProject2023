@@ -76,8 +76,9 @@ app.post('/api/teams', (req, res) => {
 
 //Update a team in the database
 app.put('/api/teams/:id', async (req, res) => {
+    console.log(req.body)
 
-    let teamModel = await teamModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    let team = await teamModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(() => {res.send("Team Updated")})
     .catch(() => {res.send("Team not Updated")});
 })
